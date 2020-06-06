@@ -1,11 +1,11 @@
 import React, {useState,useEffect} from "react";
 
 //Custom component
-import {ProductCard} from "../components";
+import {Header, ProductCard} from "../components";
 
 //Styled component
 import {Wrapper} from "./styled-components"
-import {HeaderContainer, HeadingText, Input} from "../components/styled-components";
+import {EmptyPageContainer, EmptyPageText} from "../components/styled-components";
 
 const ProductContainer = ({productList}) => {
   const [products, setProducts] = useState(productList)
@@ -25,10 +25,13 @@ const ProductContainer = ({productList}) => {
 
   return (
     <Wrapper>
-      <HeaderContainer>
-        <HeadingText>İlginizi Çekebilecek Ürünler</HeadingText>
-        <Input placeholder="Ürün ara" value={searchTerm} onChange={(e)=>setSearchTerm(e.target.value)}/>
-      </HeaderContainer>
+      <Header setSearchTerm={setSearchTerm} searchTerm={searchTerm}/>
+      {products.length === 0 &&
+      <EmptyPageContainer>
+        <EmptyPageText>
+          Aradığınız ürünü bulamadık, lütfen başka bir ürün arayın.
+        </EmptyPageText>
+      </EmptyPageContainer>}
       {
         products.map(product => {
             return(

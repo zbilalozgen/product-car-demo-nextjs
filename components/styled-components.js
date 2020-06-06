@@ -22,11 +22,8 @@ export const CardContainer = styled.a`
     
     @media screen and (max-width: 560px) {
     flex-basis: 280px;
-    }
-  
+    } 
 `
-
-
 
 export const LikedIconContainer = styled.div`
   width: 30px;
@@ -102,35 +99,65 @@ export const ShippingText = styled.span`
   margin-left: ${props => props.cargo === "Ücretli Kargo" ? 0 : '12px'};
 `
 
+//Header components
 export const HeaderContainer = styled.div`
   background: #fff;
   width: 100%;
   margin: 15px 15px;
   border-radius: 4px;
   display:flex;
+  
+  @media screen and (max-width: 560px) {
+    flex-direction: column;
+  }
 
 `
 
 export const HeadingText = styled.h2`
   color: #333;
-  font-size: 1.3rem;
+  font-size: 1rem;
   font-weight: normal;
   margin-top: 0;
   padding-top: 1.5rem;
   padding-left: 20px;
-  width: 100%;
+  width: 100%; 
 `
 
-export const Input = styled.input`
+export const SearchInput = styled.input`
   box-sizing: border-box;
   font-size: 14px;
   line-height: 1;
   background-color: transparent;
   width: 30%;
-  margin: 10px;
+  margin: 10px 20px;
   padding: 10px;
   border: 1px solid #eee;
   border-radius: 4px;
   color: #333;
- 
-`;
+  
+  @media screen and (max-width: 560px) {
+  width: 80%;
+  }
+`
+
+export const EmptyPageContainer = styled.div`
+  width: 100%;
+  height: 560px;
+  border-radius: 4px;
+  display: flex;
+  background-image: url("https://cdn.dribbble.com/users/283708/screenshots/7084440/artboard___14_2x.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: top;
+  justify-content: center;
+  align-items: flex-start;
+  margin: 15px;
+`
+
+
+export const EmptyPageText = styled.h2`
+  color: #333;
+  padding: 1.5rem;
+  font-weight: normal;
+`
+
