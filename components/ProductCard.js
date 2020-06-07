@@ -1,6 +1,4 @@
-import React, {useState, useEffect} from 'react';
-import { IconContext } from "react-icons/lib";
-import {loadFirebase} from "../firebase";
+import React, {useState} from 'react';
 
 //Styled component
 import {
@@ -15,52 +13,49 @@ import {
   LikedIconContainer
 } from "./styled-components";
 
+//Icons
 import {FiHeart} from "react-icons/fi";
 import {FaHeart} from "react-icons/fa"
+
+//Utils
+import { IconContext } from "react-icons/lib";
 import PropTypes from 'prop-types'
 
-
-const likedIcon = () => (
+const renderLikedIcon = () => (
   <IconContext.Provider value={{ color: "#e0245e"}}>
     <FaHeart/>
   </IconContext.Provider>
 )
 
-const unlikedIcon = () => (
+const renderUnlikedIcon = () => (
   <IconContext.Provider value={{ color: "#7b7b7b"}}>
     <FiHeart/>
   </IconContext.Provider>
 )
 
 export const setShippingInfoText = (freeShipping, sameDayShipping) => {
-  let shippingInfo
   if(!!freeShipping && !!sameDayShipping)  {
-    shippingInfo = "Ücretsiz - Aynı Gün Kargo"
+    return "Ücretsiz - Aynı Gün Kargo"
   } else if(!!freeShipping && !sameDayShipping) {
-    shippingInfo = "Ücretsiz Kargo"
-    // Added new category for shipping
+    return "Ücretsiz Kargo"
+    // Added new type for same day shipping
   } else if(!freeShipping && !!sameDayShipping) {
-    shippingInfo = "Aynı Gün Kargo"
+    return "Aynı Gün Kargo"
   } else {
-    shippingInfo = "Ücretli Kargo"
+    return "Ücretli Kargo"
   }
-  return shippingInfo
 }
 
-const shippingInfo = (freeShipping,sameDayShipping) => {
+const renderShippingInfo = (freeShipping,sameDayShipping) => {
   const shippingInfo = setShippingInfoText(freeShipping,sameDayShipping)
-
   return (
-
     <React.Fragment>
       {shippingInfo !== "Ücretli Kargo" && <ShippingIcon/>}
-      <ShippingText data-testid="shipping-info" cargo={shippingInfo}>
+      <ShippingText data-testid="shipping-info" shipping={shippingInfo}>
         {shippingInfo}
       </ShippingText>
     </React.Fragment>
   )
-
-
 }
 
 const ProductCard = ({data}) => {
@@ -68,24 +63,22 @@ const ProductCard = ({data}) => {
   const [isLiked, setIsLiked] = useState(false)
   const {title, image, formattedPrice, freeShipping, sameDayShipping} = productList
 
-
   const handleLikeClick = (e) => {
     e.preventDefault()
     setIsLiked(!isLiked)
   }
 
-
   return (
     <CardContainer href="https://www.gittigidiyor.com" target="_blank">
       <LikedIconContainer onClick={(e) => handleLikeClick(e)}>
-        {isLiked ?  likedIcon() : unlikedIcon() }
+        {isLiked ?  renderLikedIcon() : renderUnlikedIcon() }
       </LikedIconContainer>
       <ProductImage src={image}/>
       <ProductTitle>{title}</ProductTitle>
       <ProductPrice>{formattedPrice} TL</ProductPrice>
       <Divider/>
       <ProductShippingInfo>
-        {shippingInfo(freeShipping,sameDayShipping)}
+        {renderShippingInfo(freeShipping,sameDayShipping)}
       </ProductShippingInfo>
     </CardContainer>
   )

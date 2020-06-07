@@ -1,44 +1,49 @@
 import React, {useState,useEffect} from "react";
-
 //Custom component
 import {Header, ProductCard} from "../components";
-
 //Styled component
-import {Wrapper} from "./styled-components"
+import {ProductListWrapper} from "./styled-components"
 import {EmptyPageContainer, EmptyPageText} from "../components/styled-components";
 
+//Empty result page renderer
+const renderEmptyResult = () => (
+  <>
+    <EmptyPageContainer>
+      <EmptyPageText data-testid="empty-page">
+        Aradığınız ürünü bulamadık, lütfen başka bir ürün arayın.
+      </EmptyPageText>
+    </EmptyPageContainer>
+  </>
+)
+
 const ProductContainer = ({productList}) => {
-  const [products, setProducts] = useState(productList)
+  const [filteredProductList, setFilteredProductList] = useState(productList)
   const [searchTerm, setSearchTerm] = useState("")
+
   useEffect(() => {
     if(searchTerm.length >= 2) {
       const filteredProducts = productList.filter(product => {
         return product.title.toLowerCase().includes(searchTerm.toLowerCase())
       })
-      setProducts(filteredProducts)
+      setFilteredProductList(filteredProducts)
     } else {
-      setProducts(productList)
+      setFilteredProductList(productList)
     }
   }, [searchTerm])
 
   return (
-    <Wrapper>
-      <Header setSearchTerm={setSearchTerm} searchTerm={searchTerm}/>
-      {products.length === 0 &&
-      <EmptyPageContainer>
-        <EmptyPageText data-testid="empty-page">
-          Aradığınız ürünü bulamadık, lütfen başka bir ürün arayın.
-        </EmptyPageText>
-      </EmptyPageContainer>}
+    <ProductListWrapper>
+      <Header length={filteredProductList.length} setSearchTerm={setSearchTerm} searchTerm={searchTerm}/>
+      {filteredProductList.length === 0 && renderEmptyResult()}
       {
-        products.map(product => {
-            return(
-              <ProductCard data={product} key={product.id}/>
-            )
-          })
-        }
-    </Wrapper>
-  );
+        filteredProductList.map(product => {
+          return (
+            <ProductCard data={product} key={product.id}/>
+          )
+        })
+      }
+    </ProductListWrapper>
+  )
 }
 
 export default ProductContainer

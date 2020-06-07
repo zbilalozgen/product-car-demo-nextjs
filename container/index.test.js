@@ -1,6 +1,6 @@
 import React from "react"
 import { render, fireEvent } from "@testing-library/react"
-import {ProductContainer, title} from "./index"
+import {ProductContainer} from "./index"
 
 describe("Empty result page", () => {
   it("should render empty result when products.length = 0", () => {
@@ -41,10 +41,7 @@ describe("Search results", () => {
         freeShipping: false,
         sameDayShipping: false
       })
-      expect(title).toEqual("apple")
       search()
     }
-
-
   })
 })

@@ -1,32 +1,12 @@
 import { render } from "@testing-library/react"
-import Index,{getStaticProps} from "./index"
-import firebase from 'firebase/app'
-import 'firebase/firestore'
-
-
+import Index from "./index"
 
 describe("Render page", () => {
 
-  it("should render product page", () => {
-    const products = [{
-      id:1,
-      title:"Apple",
-      image:"url",
-      formattedPrice:"1",
-      freeShipping: false,
-      sameDayShipping: false
-    },
-      {
-        id:2,
-        title:"Apple",
-        image:"url",
-        formattedPrice:"1",
-        freeShipping: false,
-        sameDayShipping: false
-      }]
-
-    const { getByTestId } = render(<Index result={products}/>)
-    expect(getByTestId('heading-text').textContent).toBe("İlginizi Çekebilecek Ürünler")
+  it("should render product page and check heading text", () => {
+    const productList = []
+    const { getByTestId } = render(<Index productList={productList}/>)
+    expect(getByTestId('heading-text').textContent).toBe("Cep Telefonu kategorisinde 0 ürün bulundu")
   })
 })
 

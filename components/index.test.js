@@ -1,8 +1,9 @@
 import {setShippingInfoText} from "./ProductCard";
 
 describe("Shipping info", () => {
-  it("should return 'Ücretsiz - Aynı Gün Kargo' when free shipping and same day shipping correct", () => {
-    const shippingInfo = setShippingInfoText(true,true)
-    expect(shippingInfo).toEqual("Ücretsiz - Aynı Gün Kargo")
+  it("should return correct string when free shipping and same day shipping passed", () => {
+    expect(setShippingInfoText(true,true)).toEqual("Ücretsiz - Aynı Gün Kargo")
+    expect(setShippingInfoText(false,true)).toEqual("Aynı Gün Kargo")
+    expect(setShippingInfoText(true,false)).toEqual("Ücretsiz Kargo")
   } )
 })

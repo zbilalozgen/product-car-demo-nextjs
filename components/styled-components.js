@@ -1,6 +1,7 @@
-import styled from "styled-components";
 import React from "react";
+import styled from "styled-components";
 
+//Card wrapper
 export const CardContainer = styled.a`
   display: flex;
   box-sizing: border-box;
@@ -25,20 +26,22 @@ export const CardContainer = styled.a`
     } 
 `
 
+//Like Icon wrapper
 export const LikedIconContainer = styled.div`
-  width: 30px;
-  height: 30px;
+  width: 35px;
+  height: 35px;
   background: #EEE;
   border-radius: 50%;
   position: absolute;
-  top: 1rem;
-  right: 0.8rem;
+  top: 8px;
+  right: 5px;
   display: flex;
   justify-content: center;
   align-items: center;
   cursor: pointer;
 `
 
+//Product card components
 export const ProductImage = styled.img`
   max-width: 95%;
   padding: 1.5rem;
@@ -72,7 +75,7 @@ export const Divider = styled.hr`
   width: 100%;
 `
 
-
+//Shipping section components
 export const ProductShippingInfo = styled.div`
   padding: 20px;
   width: 100%;
@@ -94,33 +97,31 @@ export const ShippingIcon = () => (
   )
 
 export const ShippingText = styled.span`
-  color: ${props => props.cargo === "Ücretli Kargo" ? "#AAA" : '#83b932'};;
+  color: ${props => props.shipping === "Ücretli Kargo" ? "#AAA" : '#83b932'};;
   font-size: 14px;
-  margin-left: ${props => props.cargo === "Ücretli Kargo" ? 0 : '12px'};
+  margin-left: ${props => props.shipping === "Ücretli Kargo" ? 0 : '12px'};
 `
 
 //Header components
 export const HeaderContainer = styled.div`
+  display: flex;
   background: #fff;
   width: 100%;
-  margin: 15px 15px;
+  margin: 15px;
   border-radius: 4px;
-  display:flex;
   box-shadow: 0 1px 2px 0 rgba(85,85,85,.5);
 
   @media screen and (max-width: 560px) {
     flex-direction: column;
   }
-
 `
 
 export const HeadingText = styled.h2`
   color: #333;
   font-size: 1rem;
   margin-top: 0;
-  padding-top: 1.5rem;
-  padding-left: 20px;
-  width: 100%; 
+  padding: 20px 20px 0;
+  width: 80%; 
 `
 
 export const SearchInput = styled.input`
@@ -128,7 +129,7 @@ export const SearchInput = styled.input`
   font-size: 14px;
   line-height: 1;
   background-color: transparent;
-  width: 30%;
+  width: 80%;
   margin: 10px 20px;
   padding: 10px;
   border: 2px solid #eee;
@@ -137,26 +138,22 @@ export const SearchInput = styled.input`
   &:focus {
   outline: none;
   }
-  
-  @media screen and (max-width: 560px) {
-  width: 80%;
-  }
 `
 
+//Empty result page components
 export const EmptyPageContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
   width: 100%;
   height: 560px;
   border-radius: 4px;
-  display: flex;
   background-image: url("https://cdn.dribbble.com/users/283708/screenshots/7084440/artboard___14_2x.png");
   background-size: cover;
   background-repeat: no-repeat;
   background-position: top;
-  justify-content: center;
-  align-items: flex-start;
   margin: 15px;
 `
-
 
 export const EmptyPageText = styled.h2`
   color: #333;

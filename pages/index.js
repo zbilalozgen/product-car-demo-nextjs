@@ -1,54 +1,34 @@
 import React from "react"
-import styled, {createGlobalStyle} from "styled-components";
+//Custom component
 import {ProductContainer} from "../container"
+//Styled components
+import {MainContainer, GlobalStyle} from "./styled-components";
+//Util
 import {firebase} from "../firebase";
 
-const MainContainer = styled.div`
-  height: 100%;
-  width: 100%;
-  min-height: 100vh;
-  min-width: 380px;
-  background: #EEE;
-  
-`
-
-const GlobalStyle = createGlobalStyle`
-  body {
-    font-family: Arial, Helvetica, sans-serif;
-    margin: 0;
-  }
-`
-
-export default function Index({result}) {
-
+export default function Index({productList}) {
   return (
     <MainContainer>
       <GlobalStyle/>
-      <ProductContainer productList={result}/>
+      <ProductContainer productList={productList}/>
     </MainContainer>
   )
 }
-
 //Ignored firebase test
 /* istanbul ignore next */
 export async function getStaticProps() {
   const db = firebase.firestore()
-  let result = await new Promise((resolve => {
+  let productList = await new Promise((resolve => {
     db.collection('products')
       .get()
-      .then(snapshot => {
-        let data = []
-        snapshot.forEach(doc => {
-          data.push(Object.assign({
-            id: doc.id
-          }, doc.data()))
-          resolve(data)
-        })
+      .then((querySnapshot) => {
+      const tempDoc = querySnapshot.docs.map((doc) => {
+        return { id: doc.id, ...doc.data() }
       })
+      resolve(tempDoc)
+    })
   }))
   return {
-    props: {
-      result
-    }
+    props: {productList}
   }
 }
