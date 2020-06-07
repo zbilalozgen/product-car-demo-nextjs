@@ -14,7 +14,7 @@ export default function Index({productList}) {
     </MainContainer>
   )
 }
-//Ignored firebase test
+//Due to firestore mocking problem ignored
 /* istanbul ignore next */
 export async function getStaticProps() {
   const db = firebase.firestore()
