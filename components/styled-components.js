@@ -111,7 +111,7 @@ export const HeaderContainer = styled.div`
   border-radius: 4px;
   box-shadow: 0 1px 2px 0 rgba(85,85,85,.5);
 
-  @media screen and (max-width: 560px) {
+  @media screen and (max-width: 860px) {
     flex-direction: column;
   }
 `
@@ -129,7 +129,7 @@ export const SearchInput = styled.input`
   font-size: 14px;
   line-height: 1;
   background-color: transparent;
-  width: 80%;
+  width: 30%;
   margin: 10px 20px;
   padding: 10px;
   border: 2px solid #eee;
@@ -137,6 +137,10 @@ export const SearchInput = styled.input`
   color: #333;
   &:focus {
   outline: none;
+  }
+  
+  @media screen and (max-width: 860px) {
+  width: 60%;
   }
 `
 
