@@ -131,9 +131,12 @@ export const SearchInput = styled.input`
   width: 30%;
   margin: 10px 20px;
   padding: 10px;
-  border: 1px solid #eee;
+  border: 2px solid #eee;
   border-radius: 4px;
   color: #333;
+  &:focus {
+  outline: none;
+  }
   
   @media screen and (max-width: 560px) {
   width: 80%;
