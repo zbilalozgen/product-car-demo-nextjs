@@ -10,12 +10,10 @@ import {EmptyPageContainer, EmptyPageText} from "../components/styled-components
 const ProductContainer = ({productList}) => {
   const [products, setProducts] = useState(productList)
   const [searchTerm, setSearchTerm] = useState("")
-
   useEffect(() => {
     if(searchTerm.length >= 2) {
       const filteredProducts = productList.filter(product => {
-        const title = product.title.toLowerCase()
-        return title.includes(searchTerm.toLowerCase())
+        return product.title.toLowerCase().includes(searchTerm.toLowerCase())
       })
       setProducts(filteredProducts)
     } else {
@@ -28,7 +26,7 @@ const ProductContainer = ({productList}) => {
       <Header setSearchTerm={setSearchTerm} searchTerm={searchTerm}/>
       {products.length === 0 &&
       <EmptyPageContainer>
-        <EmptyPageText>
+        <EmptyPageText data-testid="empty-page">
           Aradığınız ürünü bulamadık, lütfen başka bir ürün arayın.
         </EmptyPageText>
       </EmptyPageContainer>}
@@ -44,3 +42,4 @@ const ProductContainer = ({productList}) => {
 }
 
 export default ProductContainer
+

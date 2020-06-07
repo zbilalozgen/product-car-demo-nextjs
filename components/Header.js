@@ -1,14 +1,11 @@
-import {HeaderContainer, HeadingText, SearchInput} from "./styled-components";
 import React from "react";
-
-const Header = (props) => {
+import {HeaderContainer, HeadingText, SearchInput} from "./styled-components";
+const Header = ({searchTerm, setSearchTerm}) => {
   return (
     <HeaderContainer>
-    <HeadingText>İlginizi Çekebilecek Ürünler</HeadingText>
-    <SearchInput placeholder="Ürün ara" value={props.searchTerm} onChange={(e)=>props.setSearchTerm(e.target.value)}/>
+    <HeadingText data-testid="heading-text">İlginizi Çekebilecek Ürünler</HeadingText>
+    <SearchInput data-testid="search-input" placeholder="Ürün ara" value={searchTerm} onChange={(e)=>setSearchTerm(e.target.value)}/>
   </HeaderContainer>)
 }
-
-
 
 export default Header

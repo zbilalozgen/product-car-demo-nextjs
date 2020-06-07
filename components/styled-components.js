@@ -106,7 +106,8 @@ export const HeaderContainer = styled.div`
   margin: 15px 15px;
   border-radius: 4px;
   display:flex;
-  
+  box-shadow: 0 1px 2px 0 rgba(85,85,85,.5);
+
   @media screen and (max-width: 560px) {
     flex-direction: column;
   }
@@ -116,7 +117,6 @@ export const HeaderContainer = styled.div`
 export const HeadingText = styled.h2`
   color: #333;
   font-size: 1rem;
-  font-weight: normal;
   margin-top: 0;
   padding-top: 1.5rem;
   padding-left: 20px;

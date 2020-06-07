@@ -1,7 +1,7 @@
 import React from "react"
 import styled, {createGlobalStyle} from "styled-components";
 import {ProductContainer} from "../container"
-import {loadFirebase} from "../firebase";
+import {firebase} from "../firebase";
 
 const MainContainer = styled.div`
   height: 100%;
@@ -22,17 +22,17 @@ const GlobalStyle = createGlobalStyle`
 export default function Index({result}) {
 
   return (
-      <MainContainer>
-        <GlobalStyle/>
-        <ProductContainer productList={result}/>
-      </MainContainer>
+    <MainContainer>
+      <GlobalStyle/>
+      <ProductContainer productList={result}/>
+    </MainContainer>
   )
 }
 
-export async function getServerSideProps() {
-  const firebase = await loadFirebase()
+//Ignored firebase test
+/* istanbul ignore next */
+export async function getStaticProps() {
   const db = firebase.firestore()
-
   let result = await new Promise((resolve => {
     db.collection('products')
       .get()

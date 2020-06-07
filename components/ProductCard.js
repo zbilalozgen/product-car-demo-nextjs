@@ -17,6 +17,8 @@ import {
 
 import {FiHeart} from "react-icons/fi";
 import {FaHeart} from "react-icons/fa"
+import PropTypes from 'prop-types'
+
 
 const likedIcon = () => (
   <IconContext.Provider value={{ color: "#e0245e"}}>
@@ -30,25 +32,30 @@ const unlikedIcon = () => (
   </IconContext.Provider>
 )
 
-const shippingInfo = (freeShipping, sameDayShipping) => {
-  let cargoInfo
+export const setShippingInfoText = (freeShipping, sameDayShipping) => {
+  let shippingInfo
   if(!!freeShipping && !!sameDayShipping)  {
-    cargoInfo = "Ücretsiz - Aynı Gün Kargo"
+    shippingInfo = "Ücretsiz - Aynı Gün Kargo"
   } else if(!!freeShipping && !sameDayShipping) {
-    cargoInfo = "Ücretsiz Kargo"
+    shippingInfo = "Ücretsiz Kargo"
     // Added new category for shipping
   } else if(!freeShipping && !!sameDayShipping) {
-    cargoInfo = "Aynı Gün Kargo"
+    shippingInfo = "Aynı Gün Kargo"
   } else {
-    cargoInfo = "Ücretli Kargo"
+    shippingInfo = "Ücretli Kargo"
   }
+  return shippingInfo
+}
+
+const shippingInfo = (freeShipping,sameDayShipping) => {
+  const shippingInfo = setShippingInfoText(freeShipping,sameDayShipping)
 
   return (
 
     <React.Fragment>
-      {cargoInfo !== "Ücretli Kargo" && <ShippingIcon/>}
-      <ShippingText cargo={cargoInfo}>
-        {cargoInfo}
+      {shippingInfo !== "Ücretli Kargo" && <ShippingIcon/>}
+      <ShippingText data-testid="shipping-info" cargo={shippingInfo}>
+        {shippingInfo}
       </ShippingText>
     </React.Fragment>
   )
@@ -85,3 +92,19 @@ const ProductCard = ({data}) => {
 };
 
 export default ProductCard;
+
+ProductCard.propTypes = {
+  title: PropTypes.string.isRequired,
+  formattedPrice: PropTypes.string.isRequired,
+  image: PropTypes.string.isRequired,
+  freeShipping: PropTypes.bool.isRequired,
+  sameDayShipping: PropTypes.bool.isRequired
+}
+
+ProductCard.defaultProps = {
+  title: "Ürün Girişi Yapılmamıştır",
+  formattedPrice: "0",
+  image: "",
+  freeShipping: false,
+  sameDayShipping: false
+}
